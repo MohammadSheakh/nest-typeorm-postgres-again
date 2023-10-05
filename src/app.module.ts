@@ -6,6 +6,7 @@ import config from '../ormconfig';
 import { RouterModule } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { UserModule } from './user/user.module';
     ConfigModule.forRoot({ // may be for env variable
       isGlobal:true
     }),
-    UserModule
+    UserModule,
+    AuthModule
   ],
   
 })

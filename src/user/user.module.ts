@@ -9,5 +9,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([User])], // it takes in array of entities
   controllers: [UserController],
   providers: [UserService],
+  exports : [UserService]  // allow one module to used in other module  
 })
 export class UserModule {}

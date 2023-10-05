@@ -11,5 +11,11 @@ export class User {
   // na dile "violates not-null constraint "  ei error dibe 
   name :string;
 
+  @Column({default : ""}) // {default : ""} ei ta must dite hobe .. 
+  username :string;
+
+  @Column({default : ""}) // {default : ""} ei ta must dite hobe .. 
+  password :string;
+
  
 }
