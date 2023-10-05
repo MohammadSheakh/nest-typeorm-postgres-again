@@ -1,0 +1,17 @@
+1. nestjs-typeorm-postgress                  -- project name 
+2. npm install pg --save		     -- for postgress 
+3. nest g resource user                      -- create user module 
+4. npm install --save @nestjs/typeorm typeorm pg
+5. 
+
+6. nest generate module database  -- for creating new module 
+7. nest g service database --no-spec 
+8. nest g service feedback --no-spec
+9. nest g controller feedback --no-spec
+10. npm i --save class-validator class-transformer
+11. npm i --save @nestjs/config
+12. npm install --save dotenv
+
+//// https://www.youtube.com/watch?v=5G81_VIjaO8&list=PLlaDAvA2MhR2jb8zavu6I-w1BA878aHcB&index=20
+
+
