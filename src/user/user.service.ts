@@ -16,14 +16,14 @@ export class UserService {
   private readonly dummyUsers: User[] = [
     {
       id: 1,
-      name: 'mohammad',
+      name: 'Mohammad',
       username: 'mohammad',
       password: '1234',
       // password should hash by bcrypt
     },
     {
       id: 2,
-      name: 'sheakh',
+      name: 'Sheakh',
       username: 'sheakh',
       password: '12345',
     },
@@ -33,12 +33,13 @@ export class UserService {
     return this.dummyUsers.find((user) => user.username === username);
   }
 
-  login():any{
-    return {};
+  login(req:any):any{
+    return {user : req.user, msg: 'logged in !'}; // from passport
   }
 
-  getHello(): string {
-    return 'Hello World!';
+  getHello(user : any): string | object {
+    const newUser = {...user, msg :'welcome to dashboard !'};
+    return newUser;
   }
 
   create(createUserDto: CreateUserDto) {

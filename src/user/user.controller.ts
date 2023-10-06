@@ -1,20 +1,62 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { AuthenticatedGuard } from 'src/auth/session/authenticated.guard';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  // Passport invoke korbo kono ekta vabe .. 
+  // we are going to be doing this by utilizing guards in nest js 
+  // we need to have guads that says.. if the user not logged in trigger
+  // this entire authentication flow .. 
+  
+  @UseGuards(LocalAuthGuard)
   @Post('login')
-  login():any{
-    return {};
+  login(@Request() req:any):any{
+    return this.userService.login(req);
+    //return req.user; // from passport 
   }
+  /*
+    login data ... 
+    //🔗http://localhost:3000/api/users/user/login [post]
+    {
+      "username": "sheakh",
+      "password": "12345"
+    }
+  */
+    /**
+     * 1. kono requst er body ashle .. amra take LocalAuthGuard e send kortesi 
+     * 2. sheta hit kortese local.strategy.ts ke .. 
+     * 3. eventually it will run validate function with username and password
+     * 4. that called validateUser function from auth.service.ts
+     * 5. in passport will save the user in requst.user
+     */
 
+
+    /**
+     * now we got the logged in user .. 
+     * how can we protect this protected route
+     * one way : session .. when the user logs in .. we can store the req.user in session
+     * session ta kothao store kora lagbe .. like redis .. ekhon amra abar stateless rakhte chai 
+     * so , JWT..
+     * session are secure .. JWT te validate korte hoy token .. 
+     */
+    /**
+     * session
+     * new guard create korbo .. jeta check korbe .. ekta requst er jonno
+     * session ase kina .. 
+     */
+  @UseGuards(AuthenticatedGuard) //🟢 for session.. 
+  // as we didnt setup session yet .. so, i expect it to always fail at this point 
+  // it returns 403 status -> Forbidden resouce .. bcz, user is not logged in 
+  // 🔃 npm i express-session 
   @Get('protected')
-  getHello():string {
-    return this.userService.getHello();
+  getHello(@Request() req : any):string | object {
+    return this.userService.getHello(req.user);
   }
 
   @Post()

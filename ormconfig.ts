@@ -9,7 +9,6 @@ const config:any | MysqlConnectionOptions | PostgresConnectionOptions = {
   host:'localhost', // new
   post: 5432, // new
   username: 'postgres', // new
-  password : '509812**', //  this password should be 
   //password: process.env.DB_PASSWORD,
   database : 'postgres', // filename 
   entities : [Feedback, User], // dist er pore src thakbe na 

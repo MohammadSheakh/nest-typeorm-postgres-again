@@ -6,3 +6,5 @@
 3. nest g resource user // for generating user
 3. nest g module auth  // for auth staff
 4. nest g service auth // for auth staff 
+
+5. npm i express-session 
