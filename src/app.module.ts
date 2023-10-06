@@ -1,4 +1,4 @@
-import { ConfigurableModuleBuilder, Module } from '@nestjs/common';
+import { ConfigurableModuleBuilder, Module, forwardRef } from '@nestjs/common';
 
 import { FeedbackModule } from './feedback/feedback.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,12 +7,15 @@ import { RouterModule } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { UserService } from './user/user.service';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(config),
     FeedbackModule,
-    UserModule,
+    forwardRef(() => UserModule), // forwardRef() is used to avoid circular dependency
+    //UserModule,
     RouterModule.register([
       {
         path:'api/feedbacks', // amader shob gula api shuru hobe ei ta diye 
@@ -29,6 +32,7 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     AuthModule
   ],
+  // providers: [UserService], // bujhi nai 😢
   
 })
 export class AppModule {}

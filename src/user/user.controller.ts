@@ -1,13 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, Inject } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { AuthenticatedGuard } from 'src/auth/session/authenticated.guard';
+import { AuthService } from 'src/auth/auth.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,  
+    private readonly authService: AuthService) {}
 
   // Passport invoke korbo kono ekta vabe .. 
   // we are going to be doing this by utilizing guards in nest js 
@@ -56,6 +59,22 @@ export class UserController {
   // 🔃 npm i express-session 
   @Get('protected')
   getHello(@Request() req : any):string | object {
+    return this.userService.getHello(req.user);
+  }
+
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  loginWithJWT(@Request() req:any):any{
+    // ⏭️🔰 TODO : return JWT access token // ✅✔️Done
+
+    return this.authService.login(req.user);
+    //return this.userService.login(req);
+    
+  }
+
+  @Get('jwt')
+  getHelloWithJWT(@Request() req : any):string | object {
+    // ⏭️🔰 TODO : require an bearer token, make sure that token is valid 
     return this.userService.getHello(req.user);
   }
 

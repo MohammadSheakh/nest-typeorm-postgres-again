@@ -1,0 +1,13 @@
+this time we are going to have this
+access token that we kind of pass
+around and thats effectivly where the
+state gonna live .. 
+
+// npm i --save @nestjs/jwt passport-jwt 
+concept ->
+  @nestjs/jwt -> creating jwt 
+  passport-jwt -> strategy for jwt
+      -> it looks for jwt in a requst 
+        and then it does things like 
+        verify , it makes sure that 
+        this token is valid .. 

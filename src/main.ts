@@ -5,7 +5,7 @@ import * as passport from 'passport';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+  /*
   // ekhane session configure korbo 
 
   // form express session documentation .. 
@@ -22,6 +22,7 @@ async function bootstrap() {
   // passport er shathe session use korle nicher duita line lagbe .. 
   app.use(passport.initialize())
   app.use(passport.session())
+*/
 
   await app.listen(3000);
 }
