@@ -16,5 +16,6 @@ import { User } from 'src/user/entities/user.entity';
   providers: [AuthService, LocalStrategy/*, SessionSerializer*/], 
   // strategy jehetu injectable .. so , register korte hobe 
   exports: [AuthService] // User Controller e use korbo 
+  // Auth Service e login nam er ekta method ase .. jeta amra User Controller e use korbo
 })
 export class AuthModule {} 

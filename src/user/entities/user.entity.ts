@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 // ei entity ta pg admin database e add hobe .. 
 
-@Entity()
+@Entity() // er moddheo table er nam bole dite pari ("");
 export class User {
   @PrimaryGeneratedColumn()
   id:number;

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
-import { JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt'; // for jwt 
 
 // now a service is something that you can inject 
 // into this auth service via constructor just like any other service 
@@ -10,7 +10,7 @@ export class AuthService {
   constructor(
     // constructor allow us to inject that 
     private usersService : UserService,
-    private jwtService :  JwtService
+    private jwtService :  JwtService // service ke amra inject korte pari via constructor
   ){}  
 
   // now what we need to add here is a validateUser method
@@ -35,10 +35,11 @@ export class AuthService {
     // create a payload .. that has information that we want to save in JWT
     const payload  = {name : user.name, sub: user.id};
     // sub -> subject .. who is this token about ..
-
+    
+    console.log("====================Auth Service  login with jwt======================================")
     return {
       accessToken : this.jwtService.sign(payload),
-
+      // to create actual jwt accessToken ..
     }
 
   }

@@ -16,7 +16,18 @@ export class UserController {
   // we are going to be doing this by utilizing guards in nest js 
   // we need to have guads that says.. if the user not logged in trigger
   // this entire authentication flow .. 
-  
+  //@UseGuards(LocalAuthGuard)
+  @Post('loginWithJWT')
+  loginWithJWT(@Request() req:any):any{
+    // ⏭️🔰 TODO : return JWT access token // ✅✔️Done
+    console.log("===================Controller=======================================")
+    
+    return this.authService.login(req);
+     //return this.userService.login(req);
+    
+  }
+
+
   @UseGuards(LocalAuthGuard)
   @Post('login')
   login(@Request() req:any):any{
@@ -62,19 +73,14 @@ export class UserController {
     return this.userService.getHello(req.user);
   }
 
-  @UseGuards(LocalAuthGuard)
-  @Post('login')
-  loginWithJWT(@Request() req:any):any{
-    // ⏭️🔰 TODO : return JWT access token // ✅✔️Done
 
-    return this.authService.login(req.user);
-    //return this.userService.login(req);
-    
-  }
+
+  
 
   @Get('jwt')
   getHelloWithJWT(@Request() req : any):string | object {
     // ⏭️🔰 TODO : require an bearer token, make sure that token is valid 
+   
     return this.userService.getHello(req.user);
   }
 
@@ -102,4 +108,6 @@ export class UserController {
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
+
+  
 }
